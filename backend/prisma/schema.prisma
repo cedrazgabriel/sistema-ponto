@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  username String @unique
+  senha String 
+  email String @unique
+  ativo Boolean @default(true)
+  descricao String?
+  perfilId  Int
+  perfil Perfil   @relation(fields: [perfilId], references: [id])
+  registroHora RegistroHora[]   
+}
+
+model Perfil {
+  id Int @id @default(autoincrement())
+  nome String @unique
+  users User[] 
+}
+
+model RegistroHora {
+  id Int @id @default(autoincrement())
+  userId Int
+  horaInicio DateTime?
+  horaIntervalo DateTime?
+  horaRetorno DateTime?
+  horaFim DateTime?
+  dataReferencia DateTime
+  idJustificativa Int?
+  horaInicioJustificativa DateTime?
+  horaIntervaloJustificativa DateTime?
+  horaRetornoJustificativa DateTime?
+  horaFimJustificativa DateTime?
+
+
+  user User @relation(fields: [userId], references: [id])
+  justificativa Justificativa? @relation(fields: [idJustificativa], references: [id])
+}
+
+model Justificativa {
+  id Int @id @default(autoincrement())
+  idRegistroHora Int
+  idMotivo Int
+  descricao String?
+  registroHora RegistroHora[]
+
+  motivo Motivo @relation(fields: [idMotivo], references: [id])
+}
+
+model Motivo {
+  id Int @id @default(autoincrement())
+  descricao String @unique
+  justificativa Justificativa[]
+}
