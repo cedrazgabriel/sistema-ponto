@@ -25,6 +25,14 @@ export class UserService {
     });
   }
 
+  findByUsername(username: string) {
+    return this.usersRepo.findUnique({
+      where: {
+        username,
+      },
+    });
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     return this.usersRepo.update({
       where: {
