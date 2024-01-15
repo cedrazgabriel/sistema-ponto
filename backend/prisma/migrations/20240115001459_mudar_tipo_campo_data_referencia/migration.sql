@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "RegistroHora" ALTER COLUMN "dataReferencia" SET DEFAULT CURRENT_TIMESTAMP,
+ALTER COLUMN "dataReferencia" SET DATA TYPE DATE;

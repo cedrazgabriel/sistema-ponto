@@ -35,7 +35,7 @@ model RegistroHora {
   horaIntervalo DateTime?
   horaRetorno DateTime?
   horaFim DateTime?
-  dataReferencia DateTime
+  dataReferencia DateTime @default(now()) @db.Date 
   idJustificativa Int?
   horaInicioJustificativa DateTime?
   horaIntervaloJustificativa DateTime?
