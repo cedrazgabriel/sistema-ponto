@@ -7,6 +7,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { PerfilModule } from './modules/perfil/perfil.module';
 import { RegistroModule } from './modules/registro/registro.module';
+import { NotificationModule } from './modules/notification/notification.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { RegistroModule } from './modules/registro/registro.module';
     MotivoModule,
     PerfilModule,
     RegistroModule,
+    NotificationModule,
   ],
   controllers: [],
   providers: [
