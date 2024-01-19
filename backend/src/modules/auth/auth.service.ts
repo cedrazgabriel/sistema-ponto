@@ -9,7 +9,7 @@ import { hash } from 'bcrypt';
 import { UsersRepository } from 'src/shared/database/repositories/user.repositories';
 import { PerfilService } from '../perfil/perfil.service';
 import { UserService } from '../user/user.service';
-import { SignUpDto } from './dto/signup';
+import { SignUpDto } from './dto/signup.dto';
 
 @Injectable()
 export class AuthService {

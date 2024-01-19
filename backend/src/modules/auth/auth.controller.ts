@@ -1,10 +1,12 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { IsPublic } from 'src/shared/decorators/isPublic';
 import { AuthService } from './auth.service';
-import { SigninDto } from './dto/signin';
-import { SignUpDto } from './dto/signup';
+import { SigninDto } from './dto/signin.dto';
+import { SignUpDto } from './dto/signup.dto';
 
 @IsPublic()
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -17,7 +19,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.CREATED)
   @Post('register')
-  signUp(@Body() loginDto: SignUpDto) {
-    return this.authService.signUp(loginDto);
+  signUp(@Body() signupDto: SignUpDto) {
+    return this.authService.signUp(signupDto);
   }
 }

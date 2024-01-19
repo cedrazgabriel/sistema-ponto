@@ -1,16 +1,18 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common';
-import { MotivoService } from './motivo.service';
 import { CreateMotivoDto } from './dto/create-motivo.dto';
 import { UpdateMotivoDto } from './dto/update-motivo.dto';
+import { MotivoService } from './motivo.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('motivo')
 @Controller('motivo')
 export class MotivoController {
   constructor(private readonly motivoService: MotivoService) {}
