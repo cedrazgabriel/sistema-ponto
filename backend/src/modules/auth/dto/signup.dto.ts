@@ -3,6 +3,7 @@ import {
   IsEmail,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
 } from 'class-validator';
 
@@ -20,10 +21,12 @@ export class SignUpDto {
   email: string;
 
   @IsBoolean()
-  ativo: boolean;
+  @IsOptional()
+  ativo?: boolean;
 
   @IsString()
-  descricao: string;
+  @IsOptional()
+  descricao?: string;
 
   @IsNumber()
   @IsNotEmpty()

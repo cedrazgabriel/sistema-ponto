@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { hash } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
 import { UsersRepository } from 'src/shared/database/repositories/user.repositories';
 import { PerfilService } from '../perfil/perfil.service';
 import { UserService } from '../user/user.service';
@@ -23,8 +23,14 @@ export class AuthService {
   async signIn(username: string, password: string) {
     const user = await this.usersService.findByUsername(username);
 
-    if (user?.senha != password) {
-      throw new UnauthorizedException('Usuário ou senha inválidos');
+    if (!user) {
+      throw new UnauthorizedException('Credenciais inválidas!');
+    }
+
+    const isPasswordValid = await compare(password, user.senha);
+
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Credenciais inválidas!');
     }
 
     const perfil = await this.perfilService.findOne(user.perfilId);
