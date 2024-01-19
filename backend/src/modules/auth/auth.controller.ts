@@ -1,7 +1,8 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { IsPublic } from 'src/shared/decorators/isPublic';
 import { AuthService } from './auth.service';
 import { SigninDto } from './dto/signin';
-import { IsPublic } from 'src/shared/decorators/isPublic';
+import { SignUpDto } from './dto/signup';
 
 @IsPublic()
 @Controller('auth')
@@ -12,5 +13,11 @@ export class AuthController {
   @Post('login')
   signIn(@Body() loginDto: SigninDto) {
     return this.authService.signIn(loginDto.username, loginDto.senha);
+  }
+
+  @HttpCode(HttpStatus.CREATED)
+  @Post('register')
+  signUp(@Body() loginDto: SignUpDto) {
+    return this.authService.signUp(loginDto);
   }
 }

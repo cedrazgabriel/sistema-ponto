@@ -1,6 +1,6 @@
 import { Controller, Post } from '@nestjs/common';
-import { NotificationService } from './notification.service';
 import { IsPublic } from 'src/shared/decorators/isPublic';
+import { NotificationService } from './notification.service';
 
 @IsPublic()
 @Controller('notification')

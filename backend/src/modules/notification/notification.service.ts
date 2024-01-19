@@ -5,9 +5,10 @@ import { readFileSync } from 'fs';
 @Injectable()
 export class NotificationService {
   async sendNotificationWhatsApp() {
-    const idInstancia = 'colocarIdInstancia';
-    const tokenInstancia = 'colocarTokenIntancia';
-    const clientToken = 'colocarClientToken';
+    const idInstancia = process.env.ZAPI_INSTANCIA_ID;
+    const tokenInstancia = process.env.ZAPI_TOKEN;
+    const clientToken = process.env.ZAPI_CLIENT_TOKEN;
+
     const baseUrl = `https://api.z-api.io/instances/${idInstancia}/token/${tokenInstancia}/send-text`;
 
     const contatos = [
@@ -38,11 +39,9 @@ export class NotificationService {
           },
         })
         .then((response) => {
-          // Lidere com a resposta da requisição
           console.log(response.data);
         })
         .catch((error) => {
-          // Lidere com erros da requisição
           console.error(error);
         });
     }
