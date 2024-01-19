@@ -1,17 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UsersRepository } from 'src/shared/database/repositories/user.repositories';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
   constructor(private readonly usersRepo: UsersRepository) {}
-
-  create(createUserDto: CreateUserDto) {
-    return this.usersRepo.create({
-      data: createUserDto,
-    });
-  }
 
   findAll() {
     return this.usersRepo.findMany({});
@@ -29,6 +22,14 @@ export class UserService {
     return this.usersRepo.findUnique({
       where: {
         username,
+      },
+    });
+  }
+
+  findByEmail(email: string) {
+    return this.usersRepo.findUnique({
+      where: {
+        email,
       },
     });
   }
