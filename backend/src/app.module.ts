@@ -8,6 +8,7 @@ import { PerfilModule } from './modules/perfil/perfil.module';
 import { RegistroModule } from './modules/registro/registro.module';
 import { UserModule } from './modules/user/user.module';
 import { DatabaseModule } from './shared/database/database.module';
+import { JustificativaModule } from './modules/justificativa/justificativa.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { DatabaseModule } from './shared/database/database.module';
     PerfilModule,
     RegistroModule,
     NotificationModule,
+    JustificativaModule,
   ],
   controllers: [],
   providers: [

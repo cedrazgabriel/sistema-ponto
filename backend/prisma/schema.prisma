@@ -11,54 +11,54 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  username String @unique
-  senha String 
-  email String @unique
-  ativo Boolean @default(true)
-  descricao String?
-  perfilId  Int
-  perfil Perfil   @relation(fields: [perfilId], references: [id])
-  registroHora RegistroHora[]   
+  id           Int            @id @default(autoincrement())
+  username     String         @unique
+  senha        String
+  email        String         @unique
+  ativo        Boolean        @default(true)
+  descricao    String?
+  perfilId     Int
+  perfil       Perfil         @relation(fields: [perfilId], references: [id])
+  registroHora RegistroHora[]
 }
 
 model Perfil {
-  id Int @id @default(autoincrement())
-  nome String @unique
-  users User[] 
+  id    Int    @id @default(autoincrement())
+  nome  String @unique
+  users User[]
 }
 
 model RegistroHora {
-  id Int @id @default(autoincrement())
-  userId Int
-  horaInicio DateTime?
-  horaIntervalo DateTime?
-  horaRetorno DateTime?
-  horaFim DateTime?
-  dataReferencia DateTime @default(now()) @db.Date 
-  idJustificativa Int?
-  horaInicioJustificativa DateTime?
+  id                         Int       @id @default(autoincrement())
+  userId                     Int
+  horaInicio                 DateTime?
+  horaIntervalo              DateTime?
+  horaRetorno                DateTime?
+  horaFim                    DateTime?
+  dataReferencia             DateTime  @default(now()) @db.Date
+  idJustificativa            Int?
+  horaInicioJustificativa    DateTime?
   horaIntervaloJustificativa DateTime?
-  horaRetornoJustificativa DateTime?
-  horaFimJustificativa DateTime?
+  horaRetornoJustificativa   DateTime?
+  horaFimJustificativa       DateTime?
 
-
-  user User @relation(fields: [userId], references: [id])
+  user          User           @relation(fields: [userId], references: [id])
   justificativa Justificativa? @relation(fields: [idJustificativa], references: [id])
 }
 
 model Justificativa {
-  id Int @id @default(autoincrement())
+  id             Int            @id @default(autoincrement())
   idRegistroHora Int
-  idMotivo Int
-  descricao String?
-  registroHora RegistroHora[]
+  idMotivo       Int
+  descricao      String?
+  registroHora   RegistroHora[]
+  isAprovado     Boolean        @default(false)
 
   motivo Motivo @relation(fields: [idMotivo], references: [id])
 }
 
 model Motivo {
-  id Int @id @default(autoincrement())
-  descricao String @unique
+  id            Int             @id @default(autoincrement())
+  descricao     String          @unique
   justificativa Justificativa[]
 }
