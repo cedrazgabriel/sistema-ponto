@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: bg-red-500;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -25,6 +25,8 @@
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
     --radius: 0.75rem;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
   }
 
   .dark {
@@ -57,5 +59,7 @@
   }
   body {
     @apply bg-background text-foreground;
+
+    
   }
 }
