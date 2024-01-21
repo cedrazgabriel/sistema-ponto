@@ -2,14 +2,17 @@ import { Label } from "@radix-ui/react-label";
 import { Card, CardDescription, CardHeader, CardTitle } from "../../ui/card";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
+import { ModeToggle } from "@/components/ui/mode-toogle";
 
 
 export function Login(){
     return (
         <Card className="w-[500px]">
             <CardHeader className="flex flex-col items-center gap-4 text-center">
-                <CardTitle>Bem vindo ao sistema de ponto</CardTitle>
+                <CardTitle>Bem vindo ao sistema de ponto
+                </CardTitle>
                 <CardDescription>Informe os dados da sua conta registrada:</CardDescription>
+                <ModeToggle />
             </CardHeader>
             <form>
                 <div className="p-4 flex flex-col gap-3">
