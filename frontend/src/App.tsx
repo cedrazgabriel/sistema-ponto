@@ -1,12 +1,35 @@
+import { AuthProvider } from "./app/contexts/AuthContext"
 import { ThemeProvider } from "./app/contexts/ThemeContext"
-import { Login } from "./components/pages/Login/Login"
+import { Toaster } from "react-hot-toast"
+import { Router } from "./router"
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    }
+  },
+})
+
 function App() {
   return (
-    <ThemeProvider>
+   <QueryClientProvider client={queryClient}>
+     <AuthProvider>
+       <ThemeProvider>
       <div className="flex items-center justify-center h-screen ">
-      <Login />
+      <Router />
+      <Toaster />
     </div>
     </ThemeProvider>
+    </AuthProvider>
+    <ReactQueryDevtools />    
+   </QueryClientProvider>
+   
+   
     
   
   )
