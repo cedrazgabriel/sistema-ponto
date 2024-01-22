@@ -31,9 +31,9 @@ export function useLoginController(){
     const handleSubmit = hookFormSubmit(async (data)=> {
         try{
             console.log('oi')
-            const { acessTokenJWT }  = await mutateAsync(data)
+            const { acess_token }  = await mutateAsync(data)
              //Setar o estado de logado pra true se deu sucesso no login
-             signIn(acessTokenJWT)
+             signIn(acess_token)
          }
          catch{
              toast.error('Credenciais inválidas.')
