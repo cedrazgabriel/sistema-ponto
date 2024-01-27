@@ -29,6 +29,6 @@ export class SignUpDto {
   descricao?: string;
 
   @IsNumber()
-  @IsNotEmpty()
-  perfilId: number;
+  @IsOptional()
+  perfilId?: number;
 }

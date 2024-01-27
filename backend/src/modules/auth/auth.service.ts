@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   ConflictException,
   Injectable,
   UnauthorizedException,
@@ -18,7 +17,7 @@ export class AuthService {
     private perfilService: PerfilService,
     private jwtService: JwtService,
     private usersRepo: UsersRepository,
-  ) {}
+  ) { }
 
   async signIn(username: string, password: string) {
     const user = await this.usersService.findByUsername(username);
@@ -45,11 +44,10 @@ export class AuthService {
   }
 
   async signUp(signupDto: SignUpDto) {
-    const { username, password, email, ativo, descricao, perfilId } = signupDto;
+    const { username, password, email, ativo, descricao } = signupDto;
 
     const emailExists = await this.usersService.findByEmail(email);
     const usernameExists = await this.usersService.findByUsername(username);
-    const perfilExists = await this.perfilService.findOne(perfilId);
 
     if (emailExists) {
       throw new ConflictException('Email já cadastrado');
@@ -57,10 +55,6 @@ export class AuthService {
 
     if (usernameExists) {
       throw new ConflictException('Username já cadastrado');
-    }
-
-    if (!perfilExists) {
-      throw new BadRequestException('Perfil não existe');
     }
 
     const hashedPassword = await hash(password, 10);
@@ -72,14 +66,14 @@ export class AuthService {
         email,
         ativo,
         descricao,
-        perfilId,
+        perfilId: 1,
       },
     });
 
     const payload = {
       sub: user.id,
       username: user.username,
-      role: perfilExists.nome,
+      role: 'Colaborador',
     };
 
     return { acess_token: await this.jwtService.signAsync(payload) };

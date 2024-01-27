@@ -20,7 +20,7 @@ export function useLoginController(){
         resolver: zodResolver(schema)
     })
 
-    const {mutateAsync, isPending} = useMutation({
+    const {mutateAsync} = useMutation({
         mutationFn: async (data : signInParams) => {
             return authService.signIn(data)
         }
@@ -30,7 +30,7 @@ export function useLoginController(){
 
     const handleSubmit = hookFormSubmit(async (data)=> {
         try{
-            console.log('oi')
+            
             const { acess_token }  = await mutateAsync(data)
              //Setar o estado de logado pra true se deu sucesso no login
              signIn(acess_token)
@@ -40,5 +40,5 @@ export function useLoginController(){
          }
     })
 
-    return { handleSubmit, register, errors, isPending }
+    return { handleSubmit, register, errors }
 }
