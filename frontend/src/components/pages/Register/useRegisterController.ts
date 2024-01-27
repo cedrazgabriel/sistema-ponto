@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 
 const schema = z.object({
-    username: z.string().min(1, 'O nome de usuário não pode ser vazio'),
+    username: z.string().min(4, 'O nome de usuário não pode ser vazio'),
     password: z.string().min(8, 'A senha deve ter no mínimo 8 caracteres'),
     email: z.string().email('O email deve ser válido')
 });
@@ -16,9 +16,11 @@ const schema = z.object({
 type formData = z.infer<typeof schema>;
 
 export function useRegisterController() {
-    const { handleSubmit: hookFormSubmit, register, formState: { errors } } = useForm<formData>({
+    const form = useForm<formData>({
         resolver: zodResolver(schema)
     })
+
+
 
     const { mutateAsync } = useMutation({
         mutationFn: async (data: signUpParams) => {
@@ -28,19 +30,17 @@ export function useRegisterController() {
 
     const { signIn } = useAuth()
 
-    const handleSubmit = hookFormSubmit(async (data) => {
+    const onSubmit = async (data: signUpParams) => {
         try {
+            const { acess_token } = await mutateAsync(data);
 
-            const { acess_token } = await mutateAsync(data)
-
-            //Setar o estado de logado pra true se deu sucesso no login
-            signIn(acess_token)
+            // Setar o estado de logado para true se deu sucesso no login
+            signIn(acess_token);
+        } catch (error) {
+            toast.error('Ocorreu um erro ao criar a sua conta');
+            console.log(error);
         }
-        catch (error) {
-            toast.error('Ocorreu um erro ao criar a sua conta')
-            console.log(error)
-        }
-    })
+    }
 
-    return { handleSubmit, register, errors }
+    return { form, onSubmit }
 }
