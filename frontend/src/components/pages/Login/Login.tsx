@@ -16,6 +16,7 @@ export function Login() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 100 }}
             transition={{ duration: 0.5 }}
+            className="flex items-center justify-center h-screen"
         >
             <Card className="w-[500px]">
                 <CardHeader className="flex flex-col items-center gap-4 text-center">

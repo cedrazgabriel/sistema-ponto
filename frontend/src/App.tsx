@@ -17,21 +17,19 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-   <QueryClientProvider client={queryClient}>
-     <AuthProvider>
-       <ThemeProvider>
-      <div className="flex items-center justify-center h-screen ">
-      <Router />
-      <Toaster />
-    </div>
-    </ThemeProvider>
-    </AuthProvider>
-    <ReactQueryDevtools />    
-   </QueryClientProvider>
-   
-   
-    
-  
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ThemeProvider>
+          <Router />
+          <Toaster />
+        </ThemeProvider>
+      </AuthProvider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+
+
+
+
   )
 }
 

@@ -1,3 +1,10 @@
-export function Dashboard(){
-    return <h1>Hello World</h1>
+import { Menu } from "@/components/view/Menu";
+
+
+export function Dashboard() {
+    return (
+        <div className="m-3">
+            <Menu />
+        </div >
+    )
 }
